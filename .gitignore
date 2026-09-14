@@ -1,0 +1,10 @@
+# Virtual Environment local files ignore layer
+*opensearch-mcp-env/
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Operating system cache files
+.DS_Store
+.env

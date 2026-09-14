@@ -1,0 +1,24 @@
+{ "index": { "_index": "products", "_id": "1" } }
+{ "name": "Wireless Mouse", "category": "Electronics", "price": 25.99, "sales": 320, "rating": 4.3, "inStock": true }
+{ "index": { "_index": "products", "_id": "2" } }
+{ "name": "Mechanical Keyboard", "category": "Electronics", "price": 89.99, "sales": 210, "rating": 4.6, "inStock": true }
+{ "index": { "_index": "products", "_id": "3" } }
+{ "name": "USB-C Hub", "category": "Electronics", "price": 34.50, "sales": 450, "rating": 4.1, "inStock": true }
+{ "index": { "_index": "products", "_id": "4" } }
+{ "name": "Yoga Mat", "category": "Fitness", "price": 19.99, "sales": 600, "rating": 4.7, "inStock": true }
+{ "index": { "_index": "products", "_id": "5" } }
+{ "name": "Dumbbell Set 10kg", "category": "Fitness", "price": 45.00, "sales": 180, "rating": 4.4, "inStock": false }
+{ "index": { "_index": "products", "_id": "6" } }
+{ "name": "Running Shoes", "category": "Fitness", "price": 65.00, "sales": 720, "rating": 4.8, "inStock": true }
+{ "index": { "_index": "products", "_id": "7" } }
+{ "name": "Non-stick Pan", "category": "Kitchen", "price": 22.50, "sales": 390, "rating": 4.2, "inStock": true }
+{ "index": { "_index": "products", "_id": "8" } }
+{ "name": "Electric Kettle", "category": "Kitchen", "price": 28.00, "sales": 510, "rating": 4.5, "inStock": true }
+{ "index": { "_index": "products", "_id": "9" } }
+{ "name": "Coffee Maker", "category": "Kitchen", "price": 55.99, "sales": 275, "rating": 4.3, "inStock": true }
+{ "index": { "_index": "products", "_id": "10" } }
+{ "name": "Novel - Mystery Box", "category": "Books", "price": 12.99, "sales": 890, "rating": 4.6, "inStock": true }
+{ "index": { "_index": "products", "_id": "11" } }
+{ "name": "Cookbook - Indian Recipes", "category": "Books", "price": 15.50, "sales": 340, "rating": 4.4, "inStock": true }
+{ "index": { "_index": "products", "_id": "12" } }
+{ "name": "Desk Lamp LED", "category": "Home", "price": 18.75, "sales": 460, "rating": 4.0, "inStock": true }

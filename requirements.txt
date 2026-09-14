@@ -1,0 +1,3 @@
+google-genai
+mcp
+opensearch-mcp-server-py
