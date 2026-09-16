@@ -14,7 +14,7 @@ from google.genai.errors import ClientError
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 OPENSEARCH_PYTHON = os.environ.get("OPENSEARCH_PYTHON", "python")
-MAX_TURNS = 8
+MAX_TURNS = 12
 
 server_params = StdioServerParameters(
     command=OPENSEARCH_PYTHON,
@@ -48,13 +48,23 @@ def get_text(response):
     texts = [p.text for p in parts if getattr(p, "text", None)]
     return "\n".join(texts) if texts else None
 
+SYSTEM_INSTRUCTION = (
+    "You are responding in a plain terminal window that does not render markdown. "
+    "Never use asterisks, bold, italics, or headers. Use plain text only. "
+    "For lists, use plain dashes (-) or numbers (1., 2.) with no other symbols."
+)
+
 def call_gemini_with_retry(client, contents, tools):
     for attempt in range(4):
         try:
             return client.models.generate_content(
                 model="gemini-flash-lite-latest",
                 contents=contents,
-                config=types.GenerateContentConfig(temperature=0, tools=[tools] if tools else None),
+                config=types.GenerateContentConfig(
+                    temperature=0,
+                    tools=[tools] if tools else None,
+                    system_instruction=SYSTEM_INSTRUCTION,
+                ),
             )
         except ClientError as e:
             if e.code == 429 and attempt < 3:
@@ -116,7 +126,17 @@ async def run_query(query: str):
                 ))
                 time.sleep(3)
 
-            print("FINAL LLM RESPONSE:\n(Max turns reached without a final answer)\n")
+            # Force a final answer using only the context gathered so far, no more tool calls
+            final_response = client.models.generate_content(
+                model="gemini-flash-lite-latest",
+                contents=contents,
+                config=types.GenerateContentConfig(
+                    temperature=0,
+                    system_instruction=SYSTEM_INSTRUCTION,
+                ),
+            )
+            final_text = get_text(final_response) or "(Could not determine a final answer from the gathered data)"
+            print(f"FINAL LLM RESPONSE:\n{final_text}\n")
 
 if __name__ == "__main__":
     q = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "List all indices in OpenSearch"
