@@ -8,3 +8,6 @@ __pycache__/
 # Operating system cache files
 .DS_Store
 .env
+
+# Local screenshots/docs (not for repo)
+docs/
