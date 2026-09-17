@@ -22,6 +22,7 @@ server_params = StdioServerParameters(
     env={
         "OPENSEARCH_URL": os.environ.get("OPENSEARCH_URL", "http://localhost:9200"),
         "OPENSEARCH_NO_AUTH": "true",
+        "OPENSEARCH_ENABLED_TOOLS": "ListIndexTool,IndexMappingTool,SearchIndexTool,CountTool,GenericOpenSearchApiTool",
     },
 )
 
@@ -79,7 +80,7 @@ async def run_query(query: str):
     print(f"USER QUERY: {query}")
     print('='*70)
 
-    async with stdio_client(server_params) as (read, write):
+    async with stdio_client(server_params, errlog=open(os.devnull, "w")) as (read, write):
         async with ClientSession(read, write) as session:
             await session.initialize()
 
@@ -124,7 +125,7 @@ async def run_query(query: str):
                         name=fn.name, response={"result": result_text}
                     ))]
                 ))
-                time.sleep(3)
+                time.sleep(1)
 
             # Force a final answer using only the context gathered so far, no more tool calls
             final_response = client.models.generate_content(
